@@ -51,4 +51,18 @@ eventService.curtir = async (req, res) => {
   }
 }
 
+eventService.get = async (req, res) => {
+  try {
+    const eventos = await Eventos.find();
+
+    return res.status(200).json({
+      eventos
+    })
+  } catch (error) {
+    return res.status(422).json({
+      message: "Erro na consulta de evento",
+      error
+    })
+  }
+}
 module.exports = eventService

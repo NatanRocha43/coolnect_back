@@ -11,6 +11,7 @@ router.post('/login', userService.login)
 router.post('/senha', userService.senha)
 
 router.post('/evento', authMiddleware, eventService.add)
+router.get('/eventos', authMiddleware, eventService.get)
 router.post('/evento/curtir', authMiddleware, eventService.curtir)
 
 module.exports = router;
