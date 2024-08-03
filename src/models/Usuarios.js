@@ -56,6 +56,18 @@ UsuarioSchema.pre('save', async function(next) {
   }
 });
 
+UsuarioSchema.pre('findOneAndUpdate', async function(next) {
+  const update = this.getUpdate();
+  if (update.senha) {
+      try {
+          const salt = await bcrypt.genSalt(10);
+          update.senha = await bcrypt.hash(update.senha, salt);
+      } catch (err) {
+          return next(err);
+      }
+  }
+  next();
+});
 const Usuarios = mongoose.model('usuarios', UsuarioSchema);
 
 module.exports = Usuarios;

@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post('/cadastro', userService.add)
 router.post('/login', userService.login)
+router.post('/senha', userService.senha)
 
 module.exports = router;

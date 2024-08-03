@@ -32,7 +32,7 @@ userService.login = async (req, res) => {
     if (!user) {
       
       return res.status(422).json({
-        message: "Senha incorreta"
+        message: "Usuário não encontrado"
       });
     }
 
@@ -57,6 +57,46 @@ userService.login = async (req, res) => {
     })
   } catch (error) {
     
+  }
+}
+
+userService.senha = async (req, res) => {
+  try {
+    const data = req.body;
+
+    const user = await Usuarios.findOne({ email_pessoal: data.email_pessoal });
+    if (!user) {
+      return res.status(422).json({
+        message: "Usuário não encontrado"
+      });
+    }
+
+    if (data.seguranca_1 !== user.seguranca_1) {
+      return res.status(422).json({
+        message: "Pergunta 1 incorreta"
+      });
+    }
+    if (data.seguranca_2 !== user.seguranca_2) {
+      return res.status(422).json({
+        message: "Pergunta 2 incorreta"
+      });
+    }
+    if (data.seguranca_3 !== user.seguranca_3) {
+      return res.status(422).json({
+        message: "Pergunta 3 incorreta"
+      });
+    }
+
+    await Usuarios.findOneAndUpdate({ _id: user._id }, { senha: data.senha });
+
+    return res.status(200).json({
+      message: "Senha atualizada com sucesso!"
+    })
+  } catch (error) {
+    return res.status(422).json({
+      message: "Erro inesperado para atualizar a senha!",
+      error
+    })
   }
 }
 
