@@ -1,5 +1,6 @@
 // models/Usuarios.js
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const UsuarioSchema = new mongoose.Schema({
   nome: {
@@ -39,6 +40,19 @@ const UsuarioSchema = new mongoose.Schema({
   senha: {
     type: String,
     required: true
+  }
+});
+
+UsuarioSchema.pre('save', async function(next) {
+  if (!this.isModified('senha')) {
+      return next();
+  }
+  try {
+      const salt = await bcrypt.genSalt(10);
+      this.senha = await bcrypt.hash(this.senha, salt);
+      next();
+  } catch (err) {
+      next(err);
   }
 });
 
