@@ -53,7 +53,8 @@ userService.login = async (req, res) => {
 
     return res.status(200).json({
       login: 'OK',
-      token
+      token,
+      user
     })
   } catch (error) {
     
