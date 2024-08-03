@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de dependências
+node_modules/
+
+# Dependências do ambiente de produção
+.env
+
+# Arquivos de compilação
+dist/
+build/
+
+# Cache de módulos
+.eslintcache/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Cobertura de testes
+coverage/
+
+# Outros
+*.bak
+*.tmp
+*.swp
