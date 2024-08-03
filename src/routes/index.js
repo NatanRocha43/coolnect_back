@@ -3,6 +3,7 @@ const authMiddleware = require('../middleware/auth');
 
 const userService = require('../services/user');
 const eventService = require('../services/event');
+const groupService = require('../services/group');
 
 const router = express.Router();
 
@@ -13,5 +14,7 @@ router.post('/senha', userService.senha)
 router.post('/evento', authMiddleware, eventService.add)
 router.get('/eventos', authMiddleware, eventService.get)
 router.post('/evento/curtir', authMiddleware, eventService.curtir)
+
+router.get('/grupos', authMiddleware, groupService.get)
 
 module.exports = router;
